@@ -1,7 +1,6 @@
 .rowWrapper {
   height: 100%;
   box-sizing: border-box;
-  cursor: move;
 
   &:hover {
     opacity: 0.7;
@@ -94,6 +93,7 @@
 
 .rowLabel {
   @extend %rowItem;
+  cursor: move;
   flex: 0 1 auto;
   padding-right: 20px;
 }
