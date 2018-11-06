@@ -158,7 +158,7 @@ class FileThemeNodeContentRenderer extends Component {
                       </div>
                     ))}
                   </div>
-                  <div className={styles.rowLabel}>
+                  {canDrag ? connectDragSource((<div className={styles.rowLabel}>
                     <span className={styles.rowTitle}>
                       {typeof nodeTitle === 'function'
                         ? nodeTitle({
@@ -168,7 +168,19 @@ class FileThemeNodeContentRenderer extends Component {
                           })
                         : nodeTitle}
                     </span>
-                  </div>
+                  </div>), { dropEffect: 'copy' }) : (
+                    <div className={styles.rowLabel}>
+                      <span className={styles.rowTitle}>
+                        {typeof nodeTitle === 'function'
+                          ? nodeTitle({
+                              node,
+                              path,
+                              treeIndex,
+                            })
+                          : nodeTitle}
+                      </span>
+                    </div>
+                  )
 
                   <div className={styles.rowToolbar}>
                     {buttons.map((btn, index) => (
@@ -188,9 +200,7 @@ class FileThemeNodeContentRenderer extends Component {
       </div>
     );
 
-    return canDrag
-      ? connectDragSource(nodeContent, { dropEffect: 'copy' })
-      : nodeContent;
+    return nodeContent;
   }
 }
 
